@@ -12,8 +12,8 @@ const getAllStores = async (req, res, next) => {
 
 const getStore = async (req, res, next) => {
     try {
-        const {id} = req.params; // ejemplo de recoger id con destructurin de req.params
-        const store = await Store.findById(id)//.populate('games');
+        const {id} = req.params;
+        const store = await Store.findById(id)//.populate('products');
         res.status(200).json(store);
     } catch (error) {
         res.status(500).send(error);
