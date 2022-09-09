@@ -54,7 +54,7 @@ const registerStrategy = new LocalStrategy(
 
       const userDB = await user.save();
 
-      userDB.password = "Jaque Mate maligno, no transferimos contraseñass";
+      userDB.password = "Data Protected";
 
       return done(null, userDB);
 

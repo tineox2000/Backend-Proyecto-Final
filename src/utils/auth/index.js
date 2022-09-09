@@ -7,6 +7,7 @@ passport.serializeUser((user, done) => {
   return done(null, user._id);
 });
 
+
 passport.deserializeUser(async (userId, done) => {
   try {
     const existingUser = await User.findById(userId);
@@ -16,5 +17,5 @@ passport.deserializeUser(async (userId, done) => {
   }
 });
 
-passport.use('logincito', loginStrategy);
-passport.use('registrito', registerStrategy);
+passport.use('login', loginStrategy);
+passport.use('register', registerStrategy);

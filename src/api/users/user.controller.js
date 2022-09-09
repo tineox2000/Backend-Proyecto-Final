@@ -1,4 +1,5 @@
 const passport = require('passport');
+const User = require('./user.model');
 
 const registerPost = (req, res) => {
   
@@ -11,8 +12,29 @@ const registerPost = (req, res) => {
     });
   }
   
-  passport.authenticate('registrito', done)(req);
+  passport.authenticate('register', done)(req);
 };
+//_____________________________________________________________
+const putUser = async (req, res, next) => {
+
+  try{
+    const id = req.params.id;
+    const user = new User(req.body);
+    user._id = id;
+    const updatedUser = await User.findByIdAndUpdate(id, user).populate('store');
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json(error);
+  } 
+}
+//_______________________________________________________________
+const checkSessionGet = (req, res, next) => {   
+  if(req.user) {     req.user.password = null;     
+    return res.status(200).json(req.user);   
+  } else {     
+    return res.status(200).json();   
+  }  
+}
 
 const loginPost = (req, res) => {
 
@@ -25,7 +47,7 @@ const loginPost = (req, res) => {
     });
   };
 
-  passport.authenticate('logincito', done)(req);
+  passport.authenticate('login', done)(req);
 };
 
 const logoutPost = async (req, res) => {
@@ -48,7 +70,9 @@ const test = (req, res) => {
 
 module.exports = {
   registerPost,
+  putUser,
   loginPost,
   logoutPost,
+  checkSessionGet,
   test,
 }
