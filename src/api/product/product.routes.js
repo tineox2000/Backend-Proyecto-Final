@@ -6,8 +6,8 @@ const {getAllProducts, getProduct, postProduct, putProduct, deleteProduct} = req
 
 router.get('/', getAllProducts);
 router.get('/:id', getProduct);
-router.post('/new', postProduct)
-router.put('/edit/:id', putProduct)
+router.post('/new', postProduct);
+router.put('/edit/:id', putProduct);
 router.delete('/delete/:id', deleteProduct);
 
 module.exports = router;

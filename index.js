@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors({ origin: '*', credentials: true }))
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 
 app.use(session({
   secret: 'ASD12sasdjkq!woiej213_SAd!asdljiasjd',
