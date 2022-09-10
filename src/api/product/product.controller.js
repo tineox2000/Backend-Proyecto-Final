@@ -13,7 +13,7 @@ const getAllProducts = async (req, res, next) => {
 const getProduct = async (req, res, next) => {
     try {
         const id = req.params.id;
-        const product = await Product.findById(id);
+        const product = await Product.findById(id).populate('store');
         if (product) {
             return res.status(200).json(product);
         }else{

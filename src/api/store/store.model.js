@@ -7,6 +7,8 @@ const storeSchema = new Schema({
     address: { type: String, required: true},
     phone: { type: Number, required: true},
     web: { type: String}, 
+    CIF: { type: Number, required: true},
+    photo: {type: String },
     products: [{type: Schema.Types.ObjectId, ref: 'Product'}] 
 },{
     timestamps: true
