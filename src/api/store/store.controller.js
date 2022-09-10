@@ -34,8 +34,6 @@ const putStore = async (req, res, next) => {
     }
 }
 
-
-
 const postStore = async (req, res, next) => {
     try {
         const newStore = new Store(req.body);
@@ -45,6 +43,16 @@ const postStore = async (req, res, next) => {
         res.status(500).send(error);
     }
 }
+const deleteStore = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const store = await Store.findByIdAndDelete(id);
+        return res.status(200).json(store);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
 
 
-module.exports = {getAllStores, getStore, putStore, postStore}
+
+module.exports = {getAllStores, getStore, putStore, postStore, deleteStore}
