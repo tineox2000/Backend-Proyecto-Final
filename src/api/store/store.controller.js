@@ -1,6 +1,44 @@
 const { response } = require('express');
 const Store = require('./store.model');
+const User = require('../users/user.model');
 
+
+//________________________________________________________
+const createStore = async (req, res, next) => {
+    try {
+        const user = req.user;
+
+        if (user.commerceId) {
+            const error = new Error('El usuario ya es propietario de un comercio');
+            error.status = 400;
+            return next(error);
+        }
+
+        const store = {
+            ...req.body,
+            owner: user._id,
+        };
+
+        const newStore = new Store(store);
+        const created = await newStore.save();
+
+        await User.findByIdAndUpdate(user._id, { commerceId: created._id });
+
+        return res.status(201).json(created);
+        
+        /**
+         * En el front ->
+         * 1. Cogemos el comercio y actualizamos en Redux.
+         * 2. MUY Importante! Tenemos que actualizar en el front el usuario, recordamos que ahora
+         * tiene un nuevo campo llamado commerceId.
+         * 
+         */
+
+    } catch (error) {
+        return next(error);
+    }
+};
+//_____________________________________________________________
 const getAllStores = async (req, res, next) => {
     try {
         const stores = await Store.find();
@@ -55,4 +93,4 @@ const deleteStore = async (req, res, next) => {
 
 
 
-module.exports = {getAllStores, getStore, putStore, postStore, deleteStore}
+module.exports = {createStore, getAllStores, getStore, putStore, postStore, deleteStore}

@@ -9,6 +9,7 @@ const storeSchema = new Schema({
     web: { type: String}, 
     cif: { type: String, required: true},
     photo: {type: String },
+    owner: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
     products: [{type: Schema.Types.ObjectId, ref: 'Product'}] 
 },{
     timestamps: true
