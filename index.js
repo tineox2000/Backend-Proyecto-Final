@@ -14,7 +14,7 @@ const db = require('./src/utils/database/db');
 dotenv.config();
 db.connect();
 
-const PORT = 4000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 
 app.use(session({
-  secret: 'ASD12sasdjkq!woiej213_SAd!asdljiasjd',
+  secret: process.env.SESSION_SECRET,
   saveUninitialized: false,
   resave: false,
   cookie: {
