@@ -16,6 +16,7 @@ const createStore = async (req, res, next) => {
 
         const store = {
             ...req.body,
+            photo: req.file_url,
             owner: user._id,
         };
 
