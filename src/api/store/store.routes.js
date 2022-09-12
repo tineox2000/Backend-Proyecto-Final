@@ -9,7 +9,7 @@ const storeRoutes = express.Router();
 storeRoutes.get('/', getAllStores);
 storeRoutes.get('/:id', getStore);
 storeRoutes.put('/edit/:id', [isAuthenticated], putStore);
-storeRoutes.post('/create', [isAuthenticated, fileMiddleware.upload.single("photo"), fileMiddleware.uploadToCloudinary], createStore);
+storeRoutes.post('/create', [isAuthenticated, fileMiddleware.upload.single("image"), fileMiddleware.uploadToCloudinary], createStore);
 storeRoutes.post('/new', [isAuthenticated], postStore);
 storeRoutes.delete('/delete/:id', [isAuthenticated], deleteStore);
 

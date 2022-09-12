@@ -9,13 +9,16 @@ const VALID_TYPE_FILE = ["image/jpg", "image/jpeg", "image/png"];
 const upload = multer({
   storage: multer.diskStorage({
     filename: (req, file, cb) => {
+      console.log('hola')
       cb(null, Date.now() + file.originalname);
     },
     destination: (req, file, cb) => {
-      cb(null, path.join(__dirname, "../public/uploads"));
+      console.log('o')
+      cb(null, path.join(__dirname, "../../../public/uploads"));
     },
   }),
   fileFilter: (req, file, cb) => {
+    console.log('ok')
     if (!VALID_TYPE_FILE.includes(file.mimetype)) {
       cb(new Error("Invalid type file"));
     } else {
@@ -32,9 +35,10 @@ const uploadToCloudinary = async (req, res, next) => {
     const image = await cloudinary.uploader.upload(filePath);
 
     //Borrar el archivo local
-    await fs.unlinkSync(filePath);
+    // await fs.unlinkSync(filePath);
 
     //Añadir propiedad file_url a nuestra req
+    console.log(image)
     req.file_url = image.secure_url;
     return next();
   } else {

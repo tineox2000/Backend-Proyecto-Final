@@ -19,21 +19,15 @@ const createStore = async (req, res, next) => {
             photo: req.file_url,
             owner: user._id,
         };
+        console.log(store);
+        // const newStore = new Store(store);
+        // const created = await newStore.save();
 
-        const newStore = new Store(store);
-        const created = await newStore.save();
+        // await User.findByIdAndUpdate(user._id, { commerceId: created._id });
 
-        await User.findByIdAndUpdate(user._id, { commerceId: created._id });
-
-        return res.status(201).json(created);
+        return res.status(201).json('ok');
         
-        /**
-         * En el front ->
-         * 1. Cogemos el comercio y actualizamos en Redux.
-         * 2. MUY Importante! Tenemos que actualizar en el front el usuario, recordamos que ahora
-         * tiene un nuevo campo llamado commerceId.
-         * 
-         */
+      
 
     } catch (error) {
         return next(error);
