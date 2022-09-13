@@ -16,9 +16,11 @@ const createStore = async (req, res, next) => {
 
         const store = {
             ...req.body,
-            photo: req.file.path,
-            owner: user._id,
+            owner: user._id
         };
+        if(req.file) {
+            store.photo = req.file.path
+        }
         const newStore = new Store(store);
         const created = await newStore.save();
 
