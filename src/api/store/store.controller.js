@@ -16,10 +16,10 @@ const createStore = async (req, res, next) => {
 
         const store = {
             ...req.body,
-            photo: req.file_url,
+            photo: req.file.path,
             owner: user._id,
         };
-
+        console.log(store);
         const newStore = new Store(store);
         const created = await newStore.save();
 
@@ -27,13 +27,7 @@ const createStore = async (req, res, next) => {
 
         return res.status(201).json(created);
         
-        /**
-         * En el front ->
-         * 1. Cogemos el comercio y actualizamos en Redux.
-         * 2. MUY Importante! Tenemos que actualizar en el front el usuario, recordamos que ahora
-         * tiene un nuevo campo llamado commerceId.
-         * 
-         */
+      
 
     } catch (error) {
         return next(error);

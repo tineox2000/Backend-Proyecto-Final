@@ -11,8 +11,15 @@ const userRoutes = require('./src/api/users/user.routes');
 const storeRoutes = require('./src/api/store/store.routes')
 const productRoutes = require('./src/api/product/product.routes');
 const db = require('./src/utils/database/db');
+const cloudinary = require('cloudinary').v2;
 dotenv.config();
 db.connect();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+})
 
 const PORT = process.env.PORT || 5000;
 
