@@ -28,6 +28,10 @@ const getProduct = async (req, res, next) => {
 const postProduct = async (req, res, next) => {
     try {
         const newProduct = new Product(req.body); 
+        if (req.file) {
+            newProduct.photo = req.file.path;
+        }
+        
         const createdProduct = await newProduct.save();
         return res.status(201).json(createdProduct);
     } catch (error) {
