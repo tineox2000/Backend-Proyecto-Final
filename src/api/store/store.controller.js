@@ -16,16 +16,16 @@ const createStore = async (req, res, next) => {
 
         const store = {
             ...req.body,
-            photo: req.file_url,
+            photo: req.file.path,
             owner: user._id,
         };
         console.log(store);
-        // const newStore = new Store(store);
-        // const created = await newStore.save();
+        const newStore = new Store(store);
+        const created = await newStore.save();
 
-        // await User.findByIdAndUpdate(user._id, { commerceId: created._id });
+        await User.findByIdAndUpdate(user._id, { commerceId: created._id });
 
-        return res.status(201).json('ok');
+        return res.status(201).json(created);
         
       
 

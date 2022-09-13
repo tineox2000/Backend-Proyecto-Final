@@ -31,6 +31,7 @@ const upload = multer({
 
 const uploadToCloudinary = async (req, res, next) => {
   if (req.file) {
+    console.log('ok')
     const filePath = req.file.path;
     const image = await cloudinary.uploader.upload(filePath);
 
@@ -42,6 +43,7 @@ const uploadToCloudinary = async (req, res, next) => {
     req.file_url = image.secure_url;
     return next();
   } else {
+    console.log('hola')
     return next();
   }
 };
