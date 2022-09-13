@@ -19,7 +19,6 @@ const createStore = async (req, res, next) => {
             photo: req.file.path,
             owner: user._id,
         };
-        console.log(store);
         const newStore = new Store(store);
         const created = await newStore.save();
 
@@ -55,11 +54,9 @@ const getStore = async (req, res, next) => {
 
 const putStore = async (req, res, next) => {
     try {
-        console.log(req.params.id);
         const id = req.params.id;
         const store = new Store(req.body);
         store._id = id;   //cambiamos el id al nuevo objeto para actualizar el que genera por el suyo
-        console.log(store);
         const updatedStore = await Store.findByIdAndUpdate(id, store);
         return res.status(200).json(store);
     } catch (error) {
