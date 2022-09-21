@@ -35,7 +35,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors({ origin: 'https://tangerine-market-react-redux-sass.vercel.app/', credentials: true }))
+app.use(cors({ origin: 'https://tangerine-market-react-redux-sass.vercel.app', credentials: true }))
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
