@@ -35,7 +35,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
+app.use(cors({ origin: 'https://tangerine-market.herokuapp.com/', credentials: true }))
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
